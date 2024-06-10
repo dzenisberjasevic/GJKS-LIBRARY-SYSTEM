@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+   
+       
+</head>
+<body>
+    <div class="theform">
+        <div class="title">
+            <h1>Library of GJ.K.S - Ostros</h1>
+        </div>
+        <div class="form">
+            <form method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input class="submit-btn" type="submit" value="LOGIN">
+                
+                   </form>
+        </div>
+        <div class="description">
+            <p> "There is more treasure in books than in all the <br> pirate's loot
+                on treasure Island."- Walt Disney
+               </p>
+        </div>
+    </div>
+  
+        
+        
+
+              
+
+    
+  
+</body>
+<style>
+
+    body{
+        padding: 0;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    .theform{
+        background-color:#31325A ;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .title,.form,.description{
+        width: 100%;
+        height: 33%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      
+    }
+
+    .title h1{
+        color: white;
+        font-size: 50px;
+        font-family: Arial, Helvetica, sans-serif;
+        letter-spacing: 1.5;
+    }
+    
+    .description p{
+        color: white;
+        font-size: 20px;
+        text-align: center;
+    }
+    form input{
+        width: 400px;
+        height:40px;
+        border:1px;
+        border-radius: 10px;
+        text-align:center;
+        margin-bottom:10px;
+    }
+    .submit-btn{
+        background-color:transparent;
+        color:white;
+        text-transform: capitalize;
+        font-size: 20px;
+        
+    }
+    /* Media Queries */
+
+/* Tablet */
+@media screen and (max-width: 768px) {
+    .title h1{
+        font-size: 40px;
+    }
+
+    .description p{
+        font-size: 18px;
+    }
+
+    form input{
+        width: 300px;
+        height: 35px;
+    }
+
+    .submit-btn{
+        font-size: 18px;
+    }
+}
+
+/* Mobile */
+@media screen and (max-width: 480px) {
+
+    
+    .title h1{
+        font-size: 25px;
+        padding:5px;
+    }
+
+    .description p{
+        font-size: 16px;
+    }
+
+    form input{
+        width: 250px;
+        height: 30px;
+    }
+
+    .submit-btn{
+        font-size: 16px;
+    }
+}
+
+</style>
+
+</html>

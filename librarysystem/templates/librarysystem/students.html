@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students</title>
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'librarysystem/style.css' %}">
+</head>
+<body>
+{% include 'librarysystem/navbar.html' %}
+
+<div class="content">
+    {% include 'librarysystem/searchbar.html' %}
+
+    <div class="info">
+        <div class="modelname" style="margin: 0;">
+            <p>> Students</p>
+        </div>
+      
+        <div class="theinfo">
+             <a href="{% url 'students-create' %}"><button>New Student</button></a>
+        </div>
+    </div>
+
+    <div class="thetable">
+        <table id="rentalsTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Grade</th>
+                    <th>Active Rents</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ student.first_name }}</td>
+                    <td>{{ student.last_name }}</td>
+                    <td>{{ student.grade }}</td>
+                    <td>{{ student.active_rent_count }}</td>
+                    <td><a href="{% url 'students_detail' student.id %}">See more</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    document.getElementById('Search').addEventListener('keyup', function() {
+        let filter = this.value.toLowerCase();
+        let rows = document.querySelectorAll('#rentalsTable tbody tr');
+        
+        rows.forEach(row => {
+            let book = row.children[1].textContent.toLowerCase();
+            let student = row.children[2].textContent.toLowerCase();
+            if (book.includes(filter) || student.includes(filter)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+</body>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #C1C2CF;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .content {
+        padding-left: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        height: 100%;
+        width: 80%;
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    .info {
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 50px;
+    }
+
+    .modelname{
+        width: 33%;
+        height: 50px;
+        padding: 10px;
+    }
+
+    .modelname p{
+        font-size: 30px;
+        color: #31325A;
+        text-align: left;
+        font-weight: 600;
+       
+    }
+
+
+    .info .theinfo {
+        width: 33%;
+        height: 50px;
+        padding: 10px;
+    }
+
+    .theinfo {
+        width: 100px;
+        height: 50px;
+        
+        border-radius: 10px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        margin-left: 30px;
+        color: white;
+    }
+
+
+    .theinfo a{
+         width: 100px;
+        height: 50px;
+    }
+
+    .theinfo a button{
+        width: 100px;
+        height: 50px;
+        cursor: pointer;
+        border-radius: 10px;
+        background-color: #31325A;
+        margin-right: 50px;
+        color: white;
+        border: none;
+    }
+
+    .theinfo a button:hover{
+        background-color: #4A4B7D;
+    }
+
+    .thetable {
+        width: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 30px;
+        flex-direction: column;
+        background-color: #31325A;
+    }
+
+    .thetable table {
+        width: 100%;
+        background-color: #31325A;
+        border-collapse: collapse;
+    }
+
+    .thetable th,
+    .thetable td {
+        color: white;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .thetable th {
+        background-color: #31325A;
+    }
+
+    .thetable tr:nth-child(odd) {
+        background-color: #3A3B64;
+    }
+
+    .thetable tr:hover {
+        background-color: #4A4B7D;
+    }
+
+    .thetable a {
+        color: #ADD8E6;
+        text-decoration: none;
+    }
+
+    .thetable a:hover {
+        text-decoration: underline;
+    }
+</style>
+</html>

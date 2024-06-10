@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Renting:{{renting.book}} rented by {{renting.student}}</title>
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'librarysystem/style.css' %}">
+</head>
+<body>
+{% include 'librarysystem/navbar.html' %}
+
+<div class="content">
+    <div class="info">
+        <div class="modelname" style="margin: 0;">
+            <p style="font-size: 20px;">> Book:{{renting.book}} rented by {{renting.student}} </p>
+        </div>
+      
+        <div class="theinfo">
+            <a style="padding-right: 10px;" href="{% url 'rentings' %}"><button>< Back</button></a>
+            <a href="#" id="createButton"><button>Update</button></a>
+        </div>
+    </div>
+
+    <div class="create">
+        <form action="{% url 'renting_edit' renting.id %}" method="POST" id="createForm">
+            {% csrf_token %}
+            <p>Details</p>
+            <select name="book" required>
+                <option  value="" disabled selected>Select a Book</option>
+                {% for book in books %}
+                <option  value="{{ book.id }}">{{ book.name }}</option>
+                {% endfor %}
+            </select>
+            <select name="student" required>
+                <option value="" disabled selected>Select a Student</option>
+                {% for student in students %}
+                <option value="{{ student.id }}">{{ student.first_name }} {{ student.last_name }}</option>
+                {% endfor %}
+            </select>
+            <input type="number" value="{{renting.quantity}}" name="quantity" required>
+            <span style="color: white;">Renting Date:</span>
+            <input type="date" name="date_rented" required>
+            <span style="color: white;">Returning Date (optional):</span>
+            <input type="date" name="date_returned">
+        </form>
+    </div>
+</div>
+
+<script>
+    document.getElementById('createButton').addEventListener('click', function(event) {
+        document.getElementById('createForm').submit(); // Submit the form
+    });
+</script>
+
+</body>
+
+<style>
+
+
+   
+  
+    .span{
+        color: white;
+    }
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #C1C2CF;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .content {
+        padding-left: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        height: 100%;
+        width: 80%;
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    .info {
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 50px;
+    }
+
+    .modelname {
+        width: 33%;
+        height: 30px;
+        padding: 10px;
+    }
+
+    .modelname p {
+        font-size: 30px;
+        color: #31325A;
+        text-align: left;
+        font-weight: 600;
+    }
+
+    .info .theinfo {
+        width: 33%;
+        height: 50px;
+        padding: 10px;
+    }
+
+    .theinfo {
+        width: 100px;
+        height: 50px;
+        border-radius: 10px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        margin-left: 30px;
+        color: white;
+    }
+
+    .theinfo a {
+        width: 100px;
+        height: 50px;
+    }
+
+    .theinfo a button {
+        width: 100px;
+        height: 50px;
+        cursor: pointer;
+        border-radius: 10px;
+        background-color: #31325A;
+        margin-right: 50px;
+        color: white;
+        border: none;
+    }
+
+    .theinfo a button:hover {
+        background-color: #4A4B7D;
+    }
+
+    .create {
+        margin-top: 50px;
+        margin-bottom: 50px;
+        padding-top: 50px;
+        padding-bottom: 100px;
+        width: 80%;
+        height: 100%;
+        background-color: #31325A;
+        border-radius: 10px;
+        border: none;
+        display: flex;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .create p {
+        color: white;
+        font-size: 20px;
+    }
+
+    .create form {
+        width: 100%;
+        height: 100%;
+    }
+
+    .create form input,
+    .create form select {
+        width: 100%;
+        height: 40px;
+        border-radius: 10px;
+        border: none;
+        padding-bottom: 10px;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+
+    .create form input::placeholder {
+        color: #C1C2CF;
+        padding: 5px;
+        font-size: 15px;
+    }
+</style>
+</html>

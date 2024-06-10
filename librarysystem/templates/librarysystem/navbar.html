@@ -1,0 +1,70 @@
+<div class="navbar-container">
+    <navbar>
+        <a id="dashboard-link" href="{% url 'dashboard' %}">Dashboard</a>
+        <a id="students-link" href="{% url 'students' %}">Students</a>
+        <a id="books-link" href="{% url 'books' %}">Books</a>
+        <a id="rentings-link" href="{% url 'rentings' %}">Rentings</a>
+        <div class="logout">
+            <a id="logout-link" href="{% url 'user-logout' %}">Log out</a>
+        </div>
+    </navbar>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const links = {
+                "dashboard-link": "{% url 'dashboard' %}",
+                "students-link": "{% url 'students' %}",
+                "books-link": "{% url 'books' %}",
+                "rentings-link": "{% url 'rentings' %}",
+                "logout-link": "{% url 'user-logout' %}"
+            };
+
+            const currentUrl = window.location.href;
+
+            for (const [id, url] of Object.entries(links)) {
+                if (currentUrl.includes(url)) {
+                    document.getElementById(id).classList.add("active");
+                    break;
+                }
+            }
+        });
+    </script>
+</div>
+
+<style>
+    .navbar-container{
+        width: 20%;
+        height: 100vh;
+        position: fixed;
+        background-color: #31325A;
+        padding-top: 30px;
+    }
+
+    .navbar-container navbar{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .navbar-container navbar a{
+        color: white;
+        padding-bottom: 30px;
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+    .navbar-container navbar a.active {
+        font-weight: bold;
+       
+        padding-left: 10px;
+    }
+
+    .logout {
+        margin: auto;
+        margin-bottom: 50px;
+    }
+
+</style>
